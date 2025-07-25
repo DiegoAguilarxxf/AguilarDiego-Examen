@@ -30,26 +30,27 @@
         <thead>
             <tr>
                 <th>
-                    Tareas
+                    Proyectos
                 </th>
                 <th>
-                    Proyectos
+                    ProyectosTareas
                 </th>
                 
             </tr>
         </thead>
         <tbody>
-            @foreach (var usuario  in Model.Tareas)
+            @foreach (var tarea in Model.Tareas)
             {
                 <tr>
+                    <td>@tarea.Proyecto?.Nombre</td>
                     <td>
-
-                        @Html.DisplayFor(modelItem => usuario.Id)
+                        <a asp-action="Details" asp-controller="Tareas" asp-route-id="@tarea.Id">
+                            @tarea.ProyectoId - @tarea.Nombre
+                        </a>
                     </td>
-                    <td><a asp-action="Details" asp-controller="Tareas" asp-route-id="@usuario.Id">@usuario.ProyectoId>@usuario.Nombre</a></td>
-                    
                 </tr>
             }
+
         </tbody>
     </table>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

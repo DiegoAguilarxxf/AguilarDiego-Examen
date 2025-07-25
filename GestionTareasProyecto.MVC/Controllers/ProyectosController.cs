@@ -1,11 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System.Data;
+using System.Threading.Tasks;
 using GestionTareas.Consumer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Modelos.GestionTareas;
 
 namespace GestionTareasProyecto.MVC.Controllers
 {
+   [ Authorize(Roles = "usuario")]
     public class ProyectosController : Controller
     {
         // GET: ProyectosController
@@ -18,9 +21,23 @@ namespace GestionTareasProyecto.MVC.Controllers
 
         // GET: ProyectosController/Details/5
         public async Task<ActionResult> Details(int id)
-        {    var proyecto= await Crud<Proyecto>.GetByIdAsync(id);
+        {
+            var proyecto = await Crud<Proyecto>.GetByIdAsync(id);
+            var usuarios = await Crud<Usuario>.GetAllAsync();
+            var tareas = await Crud<Tarea>.GetAllAsync();
+
+            proyecto.Tareas = tareas
+                .Where(t => t.ProyectoId == proyecto.Id)
+                .ToList();
+
+            foreach (var tarea in proyecto.Tareas)
+            {
+                tarea.Usuario = usuarios.FirstOrDefault(u => u.Id == tarea.UsuarioId); 
+            }
+
             return View(proyecto);
         }
+
 
         // GET: ProyectosController/Create
         public ActionResult Create()
@@ -35,6 +52,7 @@ namespace GestionTareasProyecto.MVC.Controllers
         {
             try
             { await Crud<Proyecto>.CreateAsync(proyecto);
+                
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -17,4 +17,6 @@ using Modelos.GestionTareas;
 public DbSet<Modelos.GestionTareas.Usuario> Usuario { get; set; } = default!;
 
 public DbSet<Modelos.GestionTareas.Proyecto> Proyecto { get; set; } = default!;
+
+public DbSet<Modelos.GestionTareas.Reporte> Reporte { get; set; } = default!;
     }

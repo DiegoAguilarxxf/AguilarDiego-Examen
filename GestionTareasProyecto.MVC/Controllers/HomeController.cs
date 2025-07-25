@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GestionTareasProyecto.MVC.Controllers
 {
-    //[Authorize(Roles = "usuario")]
+    [Authorize(Roles = "usuario")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

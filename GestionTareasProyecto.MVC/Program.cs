@@ -14,15 +14,16 @@ namespace GestionTareasProyecto.MVC
             Crud<Tarea>.EndPoint = "https://localhost:7270/api/Tareas";
             Crud<Usuario>.EndPoint = "https://localhost:7270/api/Usuarios";
             Crud<Proyecto>.EndPoint = "https://localhost:7270/api/Proyectos";
+            Crud<Reporte>.EndPoint = "https://localhost:7270/api/Reportes";
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+            //builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+               .AddRoles<IdentityRole>()/// añadir roles
+               .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
@@ -43,7 +44,7 @@ namespace GestionTareasProyecto.MVC
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseAuthentication();
+            app.UseAuthentication();///este
             app.UseAuthorization();
 
             app.MapControllerRoute(

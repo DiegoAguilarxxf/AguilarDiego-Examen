@@ -13,5 +13,6 @@ namespace GestionTareasProyecto.MVC.Data
         public DbSet<Modelos.GestionTareas.Usuario> Usuario { get; set; } = default!;
         public DbSet<Modelos.GestionTareas.Tarea> Tarea { get; set; } = default!;
         public DbSet<Modelos.GestionTareas.Proyecto> Proyecto { get; set; } = default!;
+        public DbSet<Modelos.GestionTareas.Reporte> Reporte { get; set; } = default!;
     }
 }
