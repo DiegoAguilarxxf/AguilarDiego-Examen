@@ -22,9 +22,37 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CorreoElectronico)
         </dd>
+        
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Tareas
+                </th>
+                <th>
+                    Proyectos
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var usuario  in Model.Tareas)
+            {
+                <tr>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => usuario.Id)
+                    </td>
+                    <td><a asp-action="Details" asp-controller="Tareas" asp-route-id="@usuario.Id">@usuario.ProyectoId>@usuario.Nombre</a></td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     <a asp-action="Index">Back to List</a>
 </div>
+

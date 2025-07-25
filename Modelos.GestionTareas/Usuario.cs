@@ -12,6 +12,7 @@ namespace Modelos.GestionTareas
         [Key]public int Id { get; set; }
         public string Nombre { get; set; }
         public string CorreoElectronico { get; set; }
-        public List<Tarea>? Tareas { get; set; } = new List<Tarea>();
+        public List<Tarea>? Tareas { get; set; } 
+       
     }
 }
